@@ -1,1 +1,3 @@
-
+firebase:
+  credential:
+    path: ${GOOGLE_APPLICATION_CREDENTIALS:./service-account-key.json}
