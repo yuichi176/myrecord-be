@@ -1,7 +1,7 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['buildx', 'build', '-t', 'gcr.io/myrecord-376903/myrecord-be-spring-application', '.']
+    args: ['build', '-t', 'gcr.io/myrecord-376903/myrecord-be-spring-application', '.']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/myrecord-376903/myrecord-be-spring-application']

@@ -1,8 +1,7 @@
-# syntax=docker/dockerfile:experimental
 FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /workspace/app
 COPY . /workspace/app
-RUN --mount=type=cache,target=/root/.gradle ./gradlew clean build
+RUN ./gradlew clean build
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
 
 FROM eclipse-temurin:17-jre-alpine
