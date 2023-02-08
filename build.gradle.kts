@@ -29,7 +29,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	implementation ("com.google.cloud:google-cloud-firestore:3.7.9")
+	implementation("com.google.cloud:google-cloud-firestore:3.7.9")
 }
 
 tasks.withType<KotlinCompile> {
