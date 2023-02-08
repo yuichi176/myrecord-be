@@ -1,4 +1,4 @@
-package com.example.myrecordbe.app.form
+package com.example.myrecordbe.app.common
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer
