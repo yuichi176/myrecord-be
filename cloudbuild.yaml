@@ -1,0 +1,13 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/myrecord-376903/myrecord-be-spring-application', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/myrecord-376903/myrecord-be-spring-application']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'myrecord-rest-api', '--image', 'gcr.io/myrecord-376903/myrecord-be-spring-application', '--region', 'asia-northeast1']
+images:
+  - gcr.io//myrecord-376903/myrecord-be-spring-application
