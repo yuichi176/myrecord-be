@@ -10,4 +10,4 @@ steps:
     entrypoint: gcloud
     args: ['run', 'deploy', 'myrecord-rest-api', '--image', 'gcr.io/myrecord-376903/myrecord-be-spring-application', '--region', 'asia-northeast1']
 images:
-  - gcr.io//myrecord-376903/myrecord-be-spring-application
+  - gcr.io/myrecord-376903/myrecord-be-spring-application
