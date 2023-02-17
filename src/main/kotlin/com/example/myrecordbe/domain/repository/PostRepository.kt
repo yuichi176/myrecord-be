@@ -6,10 +6,10 @@ import com.example.myrecordbe.domain.entity.Post
 interface PostRepository {
     /**
      * ドキュメントIDで一件取得
-     * @param ドキュメントID
+     * @param documentId ドキュメントID
      * @return 投稿
      */
-    fun findOne(documentId: String): Post
+    fun findOne(documentId: String): Post?
 
     /**
      * 全件取得
