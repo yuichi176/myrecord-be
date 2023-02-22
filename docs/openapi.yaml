@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: myrecord API
+  description: REST API for myrecord application
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+    description: 'local'
+  - url: 'https://myrecord-rest-api-tyqu5egcpq-an.a.run.app'
+    description: 'production'
+tags:
+  - name: 'posts'
+paths:
+  /posts:
+    get:
+      summary: "get post list"
+      tags: ['posts']
+      deprecated: false
+      parameters:
+        - name: user
+          in: query
+          required: false
+          schema: { type:string }
+          example: "xxxxx@mail.com"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Post"
+    post:
+      summary: "post new post"
+      tags: [ 'posts' ]
+      deprecated: false
+      requestBody:
+        description: "post content"
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/PostParam"
+      responses:
+        "201":
+          description: "CREATED"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Post"
+  /posts/{documentId}:
+    get:
+      summary: "get post by documentId"
+      tags: [ 'posts' ]
+      deprecated: false
+      parameters:
+        - name: documentId
+          in: path
+          schema: { type:string }
+          example: "xxxxxxxxxxxxxxxxxxxxx"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Post"
+    put:
+      summary: "update post by documentId"
+      tags: [ 'posts' ]
+      deprecated: false
+      parameters:
+        - name: documentId
+          in: path
+          schema: { type:string }
+          example: "xxxxxxxxxxxxxxxxxxxxx"
+      requestBody:
+        description: "put content"
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/PostParam"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Post"
+    delete:
+      summary: "delete post by documentId"
+      tags: [ 'posts' ]
+      deprecated: false
+      parameters:
+        - name: documentId
+          in: path
+          schema: { type:string }
+          example: "xxxxxxxxxxxxxxxxxxxxx"
+      responses:
+        "204":
+          description: "NO CONTENT"
+components:
+  schemas:
+    Post:
+      type: "object"
+      properties:
+        documentId: { type: "string" }
+        animeName: { type: "string" }
+        rating: { type: "integer", format: "int32" }
+        deleteFlag: { type: "integer", format: "int32" }
+        user: { type: "string" }
+        createdAt: { type: "string", format: "date" }
+        updatedAt: { type: "string", format: "date" }
+        deletedAt: { type: "string", format: "date", example: null }
+    PostParam:
+      type: object
+      properties:
+        animeName: { type: string, required: true }
+        rating: { type: integer, required: true }
+        user: { type: string, required: true }
