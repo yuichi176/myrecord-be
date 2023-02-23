@@ -5,6 +5,7 @@ import com.example.myrecordbe.app.form.PostSearchParam
 import com.example.myrecordbe.domain.dto.PostSelector
 import com.example.myrecordbe.domain.entity.Post
 import com.example.myrecordbe.domain.service.PostService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -35,6 +36,7 @@ class PostController(
      * @param postParam 投稿POSTパラメータ
      * @return 投稿
      */
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     fun post(@RequestBody postParam: PostParam): Post =
         postService.save(
@@ -67,6 +69,7 @@ class PostController(
      * 投稿削除
      * @param documentId ドキュメントID
      */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{documentId}")
     fun delete(@PathVariable documentId: String) =
         postService.delete(documentId)
