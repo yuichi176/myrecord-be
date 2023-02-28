@@ -49,13 +49,13 @@ paths:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Post"
-  /posts/{documentId}:
+  /posts/{id}:
     get:
-      summary: "get post by documentId"
+      summary: "get post by id"
       tags: [ 'posts' ]
       deprecated: false
       parameters:
-        - name: documentId
+        - name: id
           in: path
           schema: { type:string }
           example: "xxxxxxxxxxxxxxxxxxxxx"
@@ -67,11 +67,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Post"
     put:
-      summary: "update post by documentId"
+      summary: "update post by id"
       tags: [ 'posts' ]
       deprecated: false
       parameters:
-        - name: documentId
+        - name: id
           in: path
           schema: { type:string }
           example: "xxxxxxxxxxxxxxxxxxxxx"
@@ -90,11 +90,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Post"
     delete:
-      summary: "delete post by documentId"
+      summary: "delete post by id"
       tags: [ 'posts' ]
       deprecated: false
       parameters:
-        - name: documentId
+        - name: id
           in: path
           schema: { type:string }
           example: "xxxxxxxxxxxxxxxxxxxxx"

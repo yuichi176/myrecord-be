@@ -5,11 +5,11 @@ import com.example.myrecordbe.domain.entity.Post
 
 interface PostService {
     /**
-     * ドキュメントIDで一件取得
-     * @param documentId ドキュメントID
+     * IDで一件取得
+     * @param id ID
      * @return 投稿
      */
-    fun findOne(documentId: String): Post
+    fun findOne(id: String): Post
 
     /**
      * 全件取得
@@ -27,7 +27,7 @@ interface PostService {
 
     /**
      * 削除
-     * @param documentId ドキュメントID
+     * @param id ID
      */
-    fun delete(documentId: String)
+    fun delete(id: String)
 }

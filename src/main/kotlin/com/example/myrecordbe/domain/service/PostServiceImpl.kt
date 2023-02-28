@@ -10,27 +10,27 @@ import org.springframework.stereotype.Service
 class PostServiceImpl(
     private val postRepository: PostRepository
 ) : PostService {
-    override fun findOne(documentId: String): Post =
-        postRepository.findOne(documentId) ?: throw NotFoundException()
+    override fun findOne(id: String): Post =
+        postRepository.findOne(id) ?: throw NotFoundException()
 
     override fun findAll(selector: PostSelector): List<Post> =
         postRepository.findAll(selector)
 
     override fun save(post: Post): Post {
-        val documentId = post.documentId
+        val id = post.id
         // 存在チェック（更新時）
-        if (documentId != null) {
-            postRepository.findOne(documentId) ?: throw NotFoundException()
+        if (id != null) {
+            postRepository.findOne(id) ?: throw NotFoundException()
         }
-        return when (documentId) {
+        return when (id) {
             null -> postRepository.add(post)
             else -> postRepository.update(post)
         }
     }
 
-    override fun delete(documentId: String) {
+    override fun delete(id: String) {
         // 存在チェック
-        postRepository.findOne(documentId) ?: throw NotFoundException()
-        postRepository.delete(documentId)
+        postRepository.findOne(id) ?: throw NotFoundException()
+        postRepository.delete(id)
     }
 }

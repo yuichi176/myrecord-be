@@ -23,13 +23,13 @@ class PostController(
         postService.findAll(PostSelector(user = params.user))
 
     /**
-     * ドキュメントIDで投稿GET
-     * @param documentId ドキュメントID
+     * IDで投稿GET
+     * @param id ID
      * @return 投稿
      */
-    @GetMapping("/{documentId}")
-    fun getByDocumentId(@PathVariable documentId: String): Post =
-        postService.findOne(documentId)
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: String): Post =
+        postService.findOne(id)
 
     /**
      * 投稿POST
@@ -50,15 +50,15 @@ class PostController(
     /**
      * 投稿PUT
      * @param putParam 投稿PUTパラメータ
-     * @param documentId ドキュメントID
+     * @param id ID
      * @return 投稿
      */
-    @PutMapping("/{documentId}")
+    @PutMapping("/{id}")
     fun put(@RequestBody putParam: PostParam,
-            @PathVariable documentId: String): Post =
+            @PathVariable id: String): Post =
         postService.save(
             Post(
-                documentId = documentId,
+                id = id,
                 animeName = putParam.animeName,
                 rating = putParam.rating,
                 user = putParam.user,
@@ -67,10 +67,10 @@ class PostController(
 
     /**
      * 投稿削除
-     * @param documentId ドキュメントID
+     * @param id ID
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{documentId}")
-    fun delete(@PathVariable documentId: String) =
-        postService.delete(documentId)
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: String) =
+        postService.delete(id)
 }

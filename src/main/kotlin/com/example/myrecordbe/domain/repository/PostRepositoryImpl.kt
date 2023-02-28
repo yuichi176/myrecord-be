@@ -22,7 +22,7 @@ class PostRepositoryImpl(
             return null
         }
         val post = doc.toObject(Post::class.java)
-        post?.documentId = doc.id
+        post?.id = doc.id
         return post
     }
 
@@ -35,7 +35,7 @@ class PostRepositoryImpl(
         val docs = future.get().documents
         val posts = docs.map { doc ->
             val post = doc.toObject(Post::class.java)
-            post.documentId = doc.id
+            post.id = doc.id
             post
         }.toList()
         return posts
@@ -57,7 +57,7 @@ class PostRepositoryImpl(
         val future = docRef.get()
         val doc = future.get()
         val post = doc.toObject(Post::class.java) ?: throw RuntimeException()
-        post.documentId = doc.id
+        post.id = doc.id
         return post
     }
 
@@ -68,7 +68,7 @@ class PostRepositoryImpl(
             "user" to post.user,
             "updatedAt" to FieldValue.serverTimestamp()
         )
-        val documentId = post.documentId
+        val documentId = post.id
         val docRef = if (documentId == null) {
             throw IllegalArgumentException()
         } else {
@@ -78,7 +78,7 @@ class PostRepositoryImpl(
         val future = docRef.get()
         val doc = future.get()
         val post = doc?.toObject(Post::class.java) ?: throw NotFoundException()
-        post.documentId = doc.id
+        post.id = doc.id
         return post
     }
 

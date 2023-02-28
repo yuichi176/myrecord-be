@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.cloud.Timestamp
 
 data class Post (
-    @JsonProperty("document_id") var documentId:String? = null,
+    @JsonProperty("id") var id:String? = null,
     @JsonProperty("anime_name") val animeName: String? = null,
     @JsonProperty("rating") val rating: Int? = null,
     @JsonProperty("delete_flag") val deleteFlag: Boolean? = null,
