@@ -1,5 +1,7 @@
 package com.example.myrecordbe.app.form
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class PostSearchParam(
-    val user: String? = null
+    @JsonProperty("user") val user: String? = null
 )

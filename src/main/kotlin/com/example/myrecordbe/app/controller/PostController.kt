@@ -66,7 +66,7 @@ class PostController(
         )
 
     /**
-     * 投稿削除
+     * 投稿削除（物理削除）
      * @param id ID
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
