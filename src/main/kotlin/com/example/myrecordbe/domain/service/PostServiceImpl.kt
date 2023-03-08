@@ -24,7 +24,10 @@ class PostServiceImpl(
         }
         return when (id) {
             null -> postRepository.add(post)
-            else -> postRepository.update(post)
+            else -> {
+                postRepository.update(post)
+                postRepository.findOne(id) ?: throw NotFoundException() // TODO: 更新前のデータが返ってしまう
+            }
         }
     }
 

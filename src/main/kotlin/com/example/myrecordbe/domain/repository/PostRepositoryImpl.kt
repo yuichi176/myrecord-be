@@ -2,7 +2,6 @@ package com.example.myrecordbe.domain.repository
 
 import com.example.myrecordbe.domain.dto.PostSelector
 import com.example.myrecordbe.domain.entity.Post
-import com.example.myrecordbe.domain.exception.NotFoundException
 import com.google.cloud.firestore.*
 import org.springframework.stereotype.Repository
 
@@ -61,7 +60,7 @@ class PostRepositoryImpl(
         return post
     }
 
-    override fun update(post: Post): Post {
+    override fun update(post: Post) {
         val data = mapOf(
             "animeName" to post.animeName,
             "rating" to post.rating,
@@ -75,11 +74,6 @@ class PostRepositoryImpl(
             postCollectionRef.document(documentId)
         }
         docRef.update(data)
-        val future = docRef.get()
-        val doc = future.get()
-        val post = doc?.toObject(Post::class.java) ?: throw NotFoundException()
-        post.id = doc.id
-        return post
     }
 
     override fun delete(documentId: String) {

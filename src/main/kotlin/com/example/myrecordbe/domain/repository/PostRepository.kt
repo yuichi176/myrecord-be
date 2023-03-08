@@ -28,9 +28,8 @@ interface PostRepository {
     /**
      * 更新
      * @param post 投稿
-     * @return 投稿
      */
-    fun update(post: Post): Post
+    fun update(post: Post)
 
     /**
      * 削除
