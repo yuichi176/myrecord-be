@@ -20,7 +20,8 @@ paths:
         - name: user
           in: query
           required: false
-          schema: { type: string }
+          schema:
+            type: string
           example: "xxxxx@mail.com"
       responses:
         "200":
@@ -58,7 +59,8 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "xxxxxxxxxxxxxxxxxxxxx"
       responses:
         "200":
@@ -75,7 +77,8 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "xxxxxxxxxxxxxxxxxxxxx"
       requestBody:
         description: "put content"
@@ -99,7 +102,8 @@ paths:
         - name: id
           in: path
           required: true
-          schema: { type: string }
+          schema:
+            type: string
           example: "xxxxxxxxxxxxxxxxxxxxx"
       responses:
         "204":
@@ -107,7 +111,7 @@ paths:
 components:
   schemas:
     Post:
-      type: "object"
+      type: object
       properties:
         document_id: { type: "string" }
         anime_name: { type: "string" }
