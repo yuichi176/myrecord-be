@@ -14,6 +14,7 @@ paths:
   /posts:
     get:
       summary: "get post list"
+      operationId: getPosts
       tags: ['posts']
       deprecated: false
       parameters:
@@ -34,6 +35,7 @@ paths:
                   $ref: "#/components/schemas/Post"
     post:
       summary: "post new post"
+      operationId: postPost
       tags: [ 'posts' ]
       deprecated: false
       requestBody:
@@ -53,6 +55,7 @@ paths:
   /posts/{id}:
     get:
       summary: "get post by id"
+      operationId: getPost
       tags: [ 'posts' ]
       deprecated: false
       parameters:
@@ -71,6 +74,7 @@ paths:
                 $ref: "#/components/schemas/Post"
     put:
       summary: "update post by id"
+      operationId: putPost
       tags: [ 'posts' ]
       deprecated: false
       parameters:
@@ -96,6 +100,7 @@ paths:
                 $ref: "#/components/schemas/Post"
     delete:
       summary: "delete post by id"
+      operationId: deletePost
       tags: [ 'posts' ]
       deprecated: false
       parameters:
