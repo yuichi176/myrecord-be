@@ -1,137 +1,150 @@
 openapi: 3.0.3
 info:
-  title: myrecord API
+  title: myrecord APIs
   description: REST API for myrecord application
   version: 1.0.0
-servers:
-  - url: 'http://localhost:8080'
-    description: 'local'
-  - url: 'https://myrecord-rest-api-tyqu5egcpq-an.a.run.app'
-    description: 'production'
 tags:
-  - name: 'posts'
+  - name: posts
 paths:
   /posts:
     get:
-      summary: "get post list"
+      summary: get post list
       operationId: getPosts
-      tags: ['posts']
-      deprecated: false
+      tags:
+        - posts
       parameters:
         - name: user
           in: query
           required: false
           schema:
             type: string
-          example: "xxxxx@mail.com"
+          example: xxxxx@gmail.com
       responses:
         "200":
-          description: "OK"
+          description: OK
           content:
             'application/json':
               schema:
-                type: "array"
+                type: array
                 items:
                   $ref: "#/components/schemas/Post"
     post:
-      summary: "post new post"
+      summary: post new post
       operationId: postPost
-      tags: [ 'posts' ]
-      deprecated: false
+      tags:
+        - posts
       requestBody:
-        description: "post content"
+        description: post content
         required: true
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/PostParam"
+              $ref: "#/components/schemas/PostRequestBody"
       responses:
         "201":
-          description: "CREATED"
+          description: CREATED
           content:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Post"
   /posts/{id}:
     get:
-      summary: "get post by id"
-      operationId: getPost
-      tags: [ 'posts' ]
-      deprecated: false
+      summary: get post by id
+      operationId: getPostById
+      tags:
+        - posts
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "xxxxxxxxxxxxxxxxxxxxx"
+          example: xxxxxxxxxxxxxxxxxxxxx
       responses:
         "200":
-          description: "OK"
+          description: OK
           content:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Post"
     put:
-      summary: "update post by id"
+      summary: update post by id
       operationId: putPost
-      tags: [ 'posts' ]
-      deprecated: false
+      tags:
+        - posts
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "xxxxxxxxxxxxxxxxxxxxx"
+          example: xxxxxxxxxxxxxxxxxxxxx
       requestBody:
-        description: "put content"
+        description: put content
         required: true
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/PostParam"
+              $ref: "#/components/schemas/PostRequestBody"
       responses:
         "200":
-          description: "OK"
+          description: OK
           content:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Post"
     delete:
-      summary: "delete post by id"
+      summary: delete post by id
       operationId: deletePost
-      tags: [ 'posts' ]
-      deprecated: false
+      tags:
+        - posts
       parameters:
         - name: id
           in: path
           required: true
           schema:
             type: string
-          example: "xxxxxxxxxxxxxxxxxxxxx"
+          example: xxxxxxxxxxxxxxxxxxxxx
       responses:
         "204":
-          description: "NO CONTENT"
+          description: NO CONTENT
 components:
   schemas:
     Post:
       type: object
       properties:
-        document_id: { type: "string" }
-        anime_name: { type: "string" }
-        rating: { type: "integer", format: "int32" }
-        delete_flag: { type: "integer", format: "int32" }
-        user: { type: "string" }
-        created_at: { type: "string", format: "date" }
-        updated_at: { type: "string", format: "date" }
-        deleted_at: { type: "string", format: "date", example: null }
-    PostParam:
+        id:
+          type: string
+        anime_name:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        delete_flag:
+          type: integer
+          format: int32
+        user:
+          type: string
+        created_at:
+          type: string
+          format: date
+        updated_at:
+          type: string
+          format: date
+        deleted_at:
+          type: string
+          format: date
+          example: null
+    PostRequestBody:
       type: object
       properties:
-        anime_name: { type: string }
-        rating: { type: integer }
-        user: { type: string }
+        anime_name:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        user:
+          type: string
       required:
         - anime_name
         - rating
