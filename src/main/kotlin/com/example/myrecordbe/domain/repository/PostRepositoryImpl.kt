@@ -26,10 +26,29 @@ class PostRepositoryImpl(
     }
 
     override fun findAll(selector: PostSelector): List<Post> {
-        val future = if (selector.user == null) {
-            postCollectionRef.whereEqualTo("deleteFlag", false).get()
-        } else {
-            postCollectionRef.whereEqualTo("user", selector.user).whereEqualTo("deleteFlag", false).get()
+        val future = when {
+            selector.user == null && selector.collectionName == null -> {
+                postCollectionRef.whereEqualTo("deleteFlag", false).get()
+            }
+            selector.user != null && selector.collectionName != null -> {
+                postCollectionRef
+                    .whereEqualTo("user", selector.user)
+                    .whereEqualTo("collectionName", selector.collectionName)
+                    .whereEqualTo("deleteFlag", false)
+                    .get()
+            }
+            selector.user == null -> {
+                postCollectionRef
+                    .whereEqualTo("collectionName", selector.collectionName)
+                    .whereEqualTo("deleteFlag", false)
+                    .get()
+            }
+            else -> {
+                postCollectionRef
+                    .whereEqualTo("user", selector.user)
+                    .whereEqualTo("deleteFlag", false)
+                    .get()
+            }
         }
         val docs = future.get().documents
         val posts = docs.map { doc ->
@@ -46,6 +65,7 @@ class PostRepositoryImpl(
             "rating" to post.rating,
             "deleteFlag" to false,
             "user" to post.user,
+            "collectionName" to post.collectionName,
             "createdAt" to FieldValue.serverTimestamp(),
             "updatedAt" to FieldValue.serverTimestamp(),
             "deletedAt" to null

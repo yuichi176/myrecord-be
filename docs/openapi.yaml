@@ -4,14 +4,15 @@ info:
   description: REST API for myrecord application
   version: 1.0.0
 tags:
-  - name: posts
+  - name: post
+  - name: collection
 paths:
   /posts:
     get:
       summary: get post list
       operationId: getPosts
       tags:
-        - posts
+        - post
       parameters:
         - name: user
           in: query
@@ -19,6 +20,12 @@ paths:
           schema:
             type: string
           example: xxxxx@gmail.com
+        - name: collection_name
+          in: query
+          required: false
+          schema:
+            type: string
+          example: movie
       responses:
         "200":
           description: OK
@@ -32,7 +39,7 @@ paths:
       summary: post new post
       operationId: postPost
       tags:
-        - posts
+        - post
       requestBody:
         description: post content
         required: true
@@ -52,7 +59,7 @@ paths:
       summary: get post by id
       operationId: getPostById
       tags:
-        - posts
+        - post
       parameters:
         - name: id
           in: path
@@ -71,7 +78,7 @@ paths:
       summary: update post by id
       operationId: putPost
       tags:
-        - posts
+        - post
       parameters:
         - name: id
           in: path
@@ -97,7 +104,72 @@ paths:
       summary: delete post by id
       operationId: deletePost
       tags:
-        - posts
+        - post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: xxxxxxxxxxxxxxxxxxxxx
+      responses:
+        "204":
+          description: NO CONTENT
+  /collections:
+    get:
+      summary: get collection list
+      operationId: getCollections
+      tags:
+        - collection
+      parameters:
+        - name: user
+          in: query
+          required: false
+          schema:
+            type: string
+          example: xxxxx@gmail.com
+      responses:
+        "200":
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Collection"
+    post:
+      summary: post new collection
+      operationId: postCollection
+      tags:
+        - collection
+      requestBody:
+        description: post content
+        required: true
+        content:
+          'application/json':
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                user:
+                  type: string
+              required:
+                - name
+                - user
+      responses:
+        "201":
+          description: CREATED
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Collection"
+  /collections/{id}:
+    delete:
+      summary: delete collection by id
+      operationId: deleteCollection
+      tags:
+        - collection
       parameters:
         - name: id
           in: path
@@ -125,6 +197,8 @@ components:
           format: int32
         user:
           type: string
+        collection_name:
+          type: string
         created_at:
           type: string
           format: date
@@ -145,7 +219,29 @@ components:
           format: int32
         user:
           type: string
+        collection_name:
+          type: string
       required:
         - anime_name
         - rating
         - user
+        - collection_name
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        user:
+          type: string
+        created_at:
+          type: string
+          format: date
+        updated_at:
+          type: string
+          format: date
+        deleted_at:
+          type: string
+          format: date
+          example: null

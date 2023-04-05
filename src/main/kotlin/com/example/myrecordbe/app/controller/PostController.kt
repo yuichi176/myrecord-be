@@ -1,6 +1,7 @@
 package com.example.myrecordbe.app.controller
 
-import com.example.myrecordbe.app.form.PostParam
+import com.example.myrecordbe.app.form.PostPostParam
+import com.example.myrecordbe.app.form.PostPutParam
 import com.example.myrecordbe.app.form.PostSearchParam
 import com.example.myrecordbe.domain.dto.PostSelector
 import com.example.myrecordbe.domain.entity.Post
@@ -20,7 +21,7 @@ class PostController(
      */
     @GetMapping
     fun get(@ModelAttribute params: PostSearchParam): List<Post> =
-        postService.findAll(PostSelector(user = params.user))
+        postService.findAll(PostSelector(user = params.user, collectionName = params.collection_name))
 
     /**
      * IDで投稿GET
@@ -38,12 +39,13 @@ class PostController(
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun post(@RequestBody postParam: PostParam): Post =
+    fun post(@RequestBody postParam: PostPostParam): Post =
         postService.save(
             Post(
                 animeName = postParam.animeName,
                 rating = postParam.rating,
                 user = postParam.user,
+                collectionName = postParam.collectionName
             )
         )
 
@@ -54,7 +56,7 @@ class PostController(
      * @return 投稿
      */
     @PutMapping("/{id}")
-    fun put(@RequestBody putParam: PostParam,
+    fun put(@RequestBody putParam: PostPutParam,
             @PathVariable id: String): Post =
         postService.save(
             Post(

@@ -6,9 +6,9 @@ import jakarta.validation.constraints.Size
 import org.jetbrains.annotations.NotNull
 
 /**
- * 投稿パラメータ
+ * 投稿PUTパラメータ
  */
-data class PostParam (
+data class PostPutParam (
     @JsonProperty("id") val id:String? = null,
 
     @field:NotBlank
